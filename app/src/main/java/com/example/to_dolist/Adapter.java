@@ -19,10 +19,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MainVH> {
     private OnClickAdd onClickAdd;
     private List<String> list = new ArrayList<>();
 
-//    public void addList(Model homeModel) {
-//        list.add(homeModel);
-//        notifyDataSetChanged();
-//    }
 
     public void setOnClickAdd(OnClickAdd onClickAdd) {
         this.onClickAdd = onClickAdd;
@@ -33,8 +29,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MainVH> {
     public MainVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item, parent, false);
-        view.setOnClickListener((View.OnClickListener) onClickAdd);
-        return new MainVH(view);
+//        view.setOnClickListener((View.OnClickListener) onClickAdd);
+        return new MainVH(view,onClickAdd);
     }
 
     @Override
@@ -55,36 +51,24 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MainVH> {
 
     class MainVH extends RecyclerView.ViewHolder{
         private TextView textEpta;
-        private EditText editTextEpta;
-        private Button btn  , btnCancel;
+        OnClickAdd onClickAdd;
 
-        MainVH(@NonNull View itemView) {
+
+
+        MainVH(@NonNull View itemView, final OnClickAdd onClickAdd) {
             super(itemView);
             textEpta = itemView.findViewById(R.id.tv_rv);
-            editTextEpta = itemView.findViewById(R.id.et_rv);
-            btn = itemView.findViewById(R.id.btn_add_the_text);
-            btnCancel = itemView.findViewById(R.id.btn_cancel);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickAdd.onClick(textEpta.getText().toString());
+                }
+            });
         }
 
         void onBind(int position) {
             textEpta.setText(list.get(position));
 
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e("tag", "onClick: Working ");
-                }
-            });
-
-            btnCancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e("tag", "onClick: Working ");
-                    String et = editTextEpta.getText().toString();
-                    onClickAdd.onClick(et);
-                }
-            });
         }
     }
 }
-

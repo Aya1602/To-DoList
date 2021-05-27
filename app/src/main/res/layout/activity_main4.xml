@@ -14,7 +14,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/priorities_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
@@ -34,7 +33,6 @@
 
 
         <TextView
-            android:id="@+id/today_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="sans-serif-black"
@@ -52,14 +50,12 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/today"
         tools:listitem="@layout/item"
-
         />
 
     <LinearLayout
         android:id="@+id/add_new_priority"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffff"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/rv">
 
@@ -72,7 +68,7 @@
             android:id="@+id/et_rv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="17dp"
             android:hint="Add new priority"
             android:textSize="20dp" />
 
@@ -102,7 +98,6 @@
             android:textAllCaps="false"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
