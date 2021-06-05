@@ -41,20 +41,24 @@ public class Backlog extends AppCompatActivity implements OnClickAdd {
         recyclerView.setAdapter(adapter);
 
 
-
         addToTodayBacklog = findViewById(R.id.add_to_today_backlog);
-        Snackbar snackbar = Snackbar.make(addToTodayBacklog, "Please select at least 1 task.", Snackbar.LENGTH_LONG);
-        snackbar.setAction("OK", new View.OnClickListener() {
+        addToTodayBacklog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Snackbar snackbar = Snackbar.make(addToTodayBacklog, "Please select at least 1 task.", Snackbar.LENGTH_LONG);
+                snackbar.setAction("OK", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
+                    }
+                });
+
+                snackbar.setTextColor(0XFFFFFFFF);
+                snackbar.setBackgroundTint(0XFF181717);
+                snackbar.setActionTextColor(0XFF096DBE);
+                snackbar.show();
             }
         });
-
-        snackbar.setTextColor(0XFFFFFFFF);
-        snackbar.setBackgroundTint(0XFF181717);
-        snackbar.setActionTextColor(0XFF096DBE);
-        snackbar.show();
 
 
 
