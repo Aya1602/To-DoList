@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity">
+
+    <LinearLayout
+        android:id="@+id/settings_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#D8D6D6"
+        >
+
+        <ImageView
+            android:id="@+id/img_exit_settings"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_keyboard_arrow_left_exit"
+            />
+
+        <TextView
+            android:id="@+id/text_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:textColor="#050505"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginLeft="120dp"
+            android:layout_gravity="center_vertical"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/settings_container_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/settings_container"
+        >
+
+        <TextView
+            android:id="@+id/history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="parent"
+            android:text="History"
+            android:textColor="#050505"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginLeft="20dp"
+            android:padding="10dp"
+            />
+
+        <View
+            android:id="@+id/border_1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/history"
+            android:background="#ccc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <TextView
+            android:id="@+id/review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/border_1"
+            android:text="Write a review"
+            android:textColor="#050505"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginLeft="20dp"
+            android:padding="10dp"
+            />
+
+        <View
+            android:id="@+id/border_2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/review"
+            android:background="#ccc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <TextView
+            android:id="@+id/feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/border_2"
+            android:text="Send feedback"
+            android:textColor="#050505"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginLeft="20dp"
+            android:padding="10dp"
+            />
+
+        <View
+            android:id="@+id/border_3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/feedback"
+            android:background="#ccc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/border_3">
+
+            <TextView
+                android:id="@+id/skip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Skip daily review"
+                android:textColor="#050505"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginLeft="20dp"
+                android:padding="10dp"
+                />
+
+            <com.sevenheaven.iosswitch.ShSwitchView
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_width="64dp"
+                android:layout_height="38dp"/>
+
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/border_4"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/skip"
+            android:background="#ccc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/border_4">
+
+            <TextView
+                android:id="@+id/highlight_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Highlight top priorities"
+                android:textColor="#050505"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginLeft="20dp"
+                android:padding="10dp"
+                />
+
+            <com.sevenheaven.iosswitch.ShSwitchView
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_width="64dp"
+                android:layout_height="38dp"/>
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/border_5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/highlight_top"
+            android:background="#ccc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/border_5">
+
+            <TextView
+                android:id="@+id/start_new_day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start new day at 4 am"
+                android:textColor="#050505"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginLeft="20dp"
+                android:padding="10dp"
+                />
+
+            <com.sevenheaven.iosswitch.ShSwitchView
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_width="64dp"
+                android:layout_height="38dp"/>
+
+        </RelativeLayout>
+
+
+        <View
+            android:id="@+id/border_6"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/start_new_day"
+            android:background="#ccc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <TextView
+            android:id="@+id/export_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Export data"
+            android:textColor="#050505"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginLeft="20dp"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@id/border_6"
+            />
+
+        <View
+            android:id="@+id/border_7"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/export_data"
+            android:background="#ccc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+    </LinearLayout>
+
+
+
+
+    <Button
+        android:id="@+id/how_work"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:text="How does it work?"
+        android:textColor="#ffff"
+        android:textSize="25sp"
+        android:fontFamily="sans-serif-black"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@+id/settings_container_2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/radius2"
+        />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/goals"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/how_work"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:id="@+id/text_goals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Goals"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textSize="38sp"
+            android:textColor="#050505"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/text_of_goals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The goal &amp; habit tracker
+
+            for high achievers."
+            android:fontFamily="sans-serif-medium"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:textColor="#050505"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_goals"
+            android:layout_marginLeft="250dp"
+            />
+
+        <ImageView
+            android:id="@+id/img_goals"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_goals"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/text_of_goals"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
