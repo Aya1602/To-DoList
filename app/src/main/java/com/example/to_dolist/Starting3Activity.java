@@ -7,18 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class Main3Activity extends AppCompatActivity {
+public class Starting3Activity extends AppCompatActivity {
     private Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main3);
+        setContentView(R.layout.activity_starting3);
         btn = findViewById(R.id.button_first_activity);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main3Activity.this, Main4Activity.class);
+                Intent intent = new Intent(Starting3Activity.this, TodayActivity.class);
                 startActivity(intent);
             }
         });

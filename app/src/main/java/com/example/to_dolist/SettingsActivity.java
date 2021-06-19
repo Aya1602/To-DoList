@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-public class SettingsActivity extends AppCompatActivity implements OnClickAdd {
+import com.example.to_dolist.adapter.Adapter;
+
+public class SettingsActivity extends AppCompatActivity implements Listener, EditTextListener {
 
     private Adapter adapter;
     private ImageView imgExitSettings;
@@ -18,14 +20,15 @@ public class SettingsActivity extends AppCompatActivity implements OnClickAdd {
         setContentView(R.layout.activity_settings);
 
         adapter = new Adapter();
-        adapter.setOnClickAdd(this);
+        adapter.setListener(this);
+        adapter.setEditTextListener(this);
 
         imgExitSettings = findViewById(R.id.img_exit_settings);
 
         imgExitSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, Main4Activity.class);
+                Intent intent = new Intent(SettingsActivity.this, TodayActivity.class);
                 overridePendingTransition(R.anim.animation, R.anim.slide_out_right);
                 startActivity(intent);
             }
@@ -36,6 +39,15 @@ public class SettingsActivity extends AppCompatActivity implements OnClickAdd {
 
     @Override
     public void onClick(String s) {
+
+    }
+
+    @Override
+    public void onDelete(TodayModel model) { // не нужно
+    }
+
+    @Override
+    public void addItem(String s) {
 
     }
 }

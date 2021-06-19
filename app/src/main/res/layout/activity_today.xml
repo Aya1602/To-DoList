@@ -5,11 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main4Activity">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    tools:context=".TodayActivity">
 
     <LinearLayout
         android:id="@+id/priorities_for"
@@ -51,33 +47,35 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_container"
         app:layout_constraintTop_toBottomOf="@+id/today"
         tools:itemCount="3"
-        tools:listitem="@layout/item" />
+        tools:listitem="@layout/item"/>
 
-    <LinearLayout
-        android:id="@+id/add_new_priority"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/rv">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/add_new_priority"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/bottom_container"-->
+<!--        >-->
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/ic_radio_button_unchecked" />
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:layout_width="35dp"-->
+<!--            android:layout_height="35dp"-->
+<!--            android:src="@drawable/ic_radio_button_unchecked" />-->
 
-        <EditText
-            android:id="@+id/et_rv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="17dp"
-            android:hint="Add new priority"
-            android:textSize="20dp" />
+<!--        <EditText-->
+<!--            android:id="@+id/et_rv"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="17dp"-->
+<!--            android:hint="Add new priority"-->
+<!--            android:textSize="20dp" />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
     <FrameLayout
         android:id="@+id/layout_1"
@@ -118,13 +116,15 @@
     <FrameLayout
         android:id="@+id/bottom_container"
         android:padding="12dp"
+
+        android:backgroundTint="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="?attr/actionBarSize">
 
 
             <View

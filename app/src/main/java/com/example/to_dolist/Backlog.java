@@ -1,11 +1,13 @@
 package com.example.to_dolist;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -13,20 +15,24 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.example.to_dolist.adapter.Adapter;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
-public class Backlog extends AppCompatActivity implements OnClickAdd {
+import java.util.List;
+
+public class Backlog extends AppCompatActivity implements Listener, EditTextListener {
 
     private Adapter adapter;
     private ImageView imgExitBacklog;
-    private EditText editText;
+//    private EditText editText;
     private RecyclerView recyclerView;
     private Button btnCancelBacklog, btnAddTheTaskBacklog;
     private Button addToTodayBacklog;
 
+    private String textFromET;
 
     private FrameLayout firstContainer, secondContainer;
 
@@ -36,7 +42,8 @@ public class Backlog extends AppCompatActivity implements OnClickAdd {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backlog);
         adapter = new Adapter();
-        adapter.setOnClickAdd(this);
+        adapter.setListener(this);
+        adapter.setEditTextListener(this);
         recyclerView = findViewById(R.id.rv_backlog);
         recyclerView.setAdapter(adapter);
 
@@ -60,14 +67,19 @@ public class Backlog extends AppCompatActivity implements OnClickAdd {
             }
         });
 
-
+        App.getInstance().getAppDataBaseBackLog().todayDao().getAllLive().observe(this, new Observer<List<TodayModel>>() {
+            @Override
+            public void onChanged(List<TodayModel> list) {
+                adapter.addItem(list);
+            }
+        });
 
 
         imgExitBacklog = findViewById(R.id.img_exit_backlog);
         imgExitBacklog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Backlog.this, Main4Activity.class);
+                Intent intent = new Intent(Backlog.this, TodayActivity.class);
                 overridePendingTransition(R.anim.animation, R.anim.slide_out_right);
                 startActivity(intent);
             }
@@ -77,7 +89,7 @@ public class Backlog extends AppCompatActivity implements OnClickAdd {
         firstContainer = findViewById(R.id.layout_backlog);
         secondContainer = findViewById(R.id.bottom_container_backlog);
 
-        editText = findViewById(R.id.et_rv_backlog);
+//        editText = findViewById(R.id.et_rv_backlog);
         btnCancelBacklog = findViewById(R.id.btn_cancel_backlog);
         btnAddTheTaskBacklog = findViewById(R.id.btn_add_the_task_backlog);
 
@@ -85,8 +97,8 @@ public class Backlog extends AppCompatActivity implements OnClickAdd {
         btnAddTheTaskBacklog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter.addItem(editText.getText().toString());
-                editText.setText("");
+//                adapter.addItem(editText.getText/().toString());
+//                editText.setText("");
                 InputMethodManager inputManager = (InputMethodManager)
                         getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -96,13 +108,22 @@ public class Backlog extends AppCompatActivity implements OnClickAdd {
                 firstContainer.setVisibility(View.GONE);
                 secondContainer.setVisibility(View.VISIBLE);
 
+                if (!textFromET.isEmpty()) {
+                    TodayModel todayModel = new TodayModel(textFromET, false);
+                    textFromET = "";
+                    App.getInstance().getAppDataBaseBackLog().todayDao().insert(todayModel);
+                } else {
+                    Log.e("test1232", "onClick: empty text" );
+                }
+
             }
         });
 
         btnCancelBacklog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editText.setText("");
+//                editText.setText("");
+                adapter.notifyDataSetChanged();
                 InputMethodManager inputManager = (InputMethodManager)
                         getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -133,5 +154,15 @@ public class Backlog extends AppCompatActivity implements OnClickAdd {
     @Override
     public void onClick(String s) {
 
+    }
+
+    @Override
+    public void onDelete(TodayModel model) {
+        App.getInstance().getAppDataBaseBackLog().todayDao().delete(model);
+    }
+
+    @Override
+    public void addItem(String s) {
+        textFromET = s;
     }
 }
