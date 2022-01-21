@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.to_dolist.TodayModel;
 
-@Database(entities = {TodayModel.class}, version = 1,exportSchema = false)
+@Database(entities = {TodayModel.class}, version = 2,exportSchema = false)
 public abstract class AppDataBase extends RoomDatabase {
     public abstract TodayDao todayDao();
 }

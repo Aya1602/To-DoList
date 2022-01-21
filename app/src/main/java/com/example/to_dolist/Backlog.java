@@ -2,6 +2,7 @@ package com.example.to_dolist;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -21,6 +22,8 @@ import com.google.android.material.snackbar.Snackbar;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class Backlog extends AppCompatActivity implements Listener, EditTextListener {
@@ -34,6 +37,8 @@ public class Backlog extends AppCompatActivity implements Listener, EditTextList
 
     private String textFromET;
 
+    private int lastPosition = -1;
+
     private FrameLayout firstContainer, secondContainer;
 
 
@@ -46,7 +51,7 @@ public class Backlog extends AppCompatActivity implements Listener, EditTextList
         adapter.setEditTextListener(this);
         recyclerView = findViewById(R.id.rv_backlog);
         recyclerView.setAdapter(adapter);
-
+        adapter.setFromBacklog(true);
 
         addToTodayBacklog = findViewById(R.id.add_to_today_backlog);
         addToTodayBacklog.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +114,9 @@ public class Backlog extends AppCompatActivity implements Listener, EditTextList
                 secondContainer.setVisibility(View.VISIBLE);
 
                 if (!textFromET.isEmpty()) {
-                    TodayModel todayModel = new TodayModel(textFromET, false);
+                    Date d = new Date(System.currentTimeMillis());
+                    String date = new SimpleDateFormat("yyyyy.MMMMM.dd").format(d);
+                    TodayModel todayModel = new TodayModel(textFromET, false,date);
                     textFromET = "";
                     App.getInstance().getAppDataBaseBackLog().todayDao().insert(todayModel);
                 } else {
@@ -147,6 +154,36 @@ public class Backlog extends AppCompatActivity implements Listener, EditTextList
             }
         });
 
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                //Remove swiped item from list and notify the RecyclerView
+                int position = viewHolder.getAdapterPosition();
+                if (position < adapter.getList().size()) {
+                    if (lastPosition != -1) adapter.getList().get(lastPosition).setDelete(false);
+                    lastPosition = position;
+                    if (swipeDir == ItemTouchHelper.LEFT) {
+                        adapter.getList().get(position).setDelete(true);
+                    } else {
+                        adapter.getList().get(position).setDelete(false);
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+//                App.getInstance().getDatabase().todayDao().delete(adapter.getList().get(position));
+//                adapter.notifyDataSetChanged();
+
+            }
+        };
+
+        ItemTouchHelper itemTouchHelpers = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelpers.attachToRecyclerView(recyclerView);
+
 
     }
 
@@ -157,8 +194,20 @@ public class Backlog extends AppCompatActivity implements Listener, EditTextList
     }
 
     @Override
-    public void onDelete(TodayModel model) {
+    public void ondoneClick(TodayModel todayModel) {
+        todayModel.setDone(!todayModel.isDone());
+        App.getInstance().getAppDataBaseBackLog().todayDao().update(todayModel);
+    }
+
+    @Override
+    public void onDelete(int position,TodayModel model) {
+        if (lastPosition == position) lastPosition = -1;
         App.getInstance().getAppDataBaseBackLog().todayDao().delete(model);
+    }
+
+    @Override
+    public void addToBacklog(int position,TodayModel model) {
+
     }
 
     @Override

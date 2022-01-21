@@ -280,9 +280,7 @@
             android:id="@+id/text_of_goals"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="The goal &amp; habit tracker
-
-            for high achievers."
+            android:text="The goal &amp; habit tracker for high achievers."
             android:fontFamily="sans-serif-medium"
             android:textAllCaps="false"
             android:textSize="20sp"
